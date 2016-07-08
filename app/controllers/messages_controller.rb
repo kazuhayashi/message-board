@@ -1,5 +1,4 @@
 class MessagesController < ApplicationController
-end
 
   before_action :set_message, only: [:edit , :update , :destroy]
   def index
@@ -11,10 +10,12 @@ end
     @message = Message.new(message_params)
      if @message.save
     redirect_to root_path , notice: 'メッセージを保存しました'
-   else @messages = Message.all
+     else @messages = Message.all
         flash.now[:alert]= "メッセージの保存に失敗しました"
         render 'index'
+     end
   end
+
   def edit
   end
   
@@ -24,7 +25,8 @@ end
   else
     render 'edit'
   end
-end
+  end
+
   def destroy
     @message.destroy
     redirect_to root_path , notice: 'メッセージを削除しました'
